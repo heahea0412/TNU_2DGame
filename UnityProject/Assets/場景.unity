@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 692057773}
   - component: {fileID: 692057771}
   m_Layer: 0
-  m_Name: Idle (1)
+  m_Name: "\u7537\u5B69"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,10 +315,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e262e65e2a739d847b1f61b3f0f0a678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.5
+  speed: 7
   jump: 300
   isGround: 0
   _name: HEAHEA
+  r2d: {fileID: 692057774}
+  ani: {fileID: 692057768}
 --- !u!70 &692057773
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -355,7 +357,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1022157174
 GameObject:
   m_ObjectHideFlags: 0
