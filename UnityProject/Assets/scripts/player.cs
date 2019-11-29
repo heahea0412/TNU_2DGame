@@ -19,6 +19,9 @@ public class player : MonoBehaviour
     [Header("元件")]
     public Rigidbody2D r2d;
     public Animator ani;
+    [Header("音效區域")]
+    public AudioSource aud;
+    public AudioClip soundcherry;
     #endregion
 
     //定義方法
@@ -31,16 +34,19 @@ public class player : MonoBehaviour
         float h =  Input.GetAxisRaw("Horizontal");   //輸入.取得軸向("水平")左右與AD
         r2d.AddForce(new Vector2(speed*h, 0));
         ani.SetBool("跑步開關", h != 0);    //動畫元件.設定布林值
+
+        if(Input.GetKeyDown(KeyCode.A)) transform.eulerAngles = new Vector3(0, 180, 0);
+        else if (Input.GetKeyDown(KeyCode.D)) transform.eulerAngles = new Vector3(0, 0, 0);
+      
     }
     private void Jump()
     {
         //如果按下空白鍵 並且 在地板上等於勾選
         if (Input.GetKeyDown(KeyCode.Space)&& isGround == true)
         {
-            //在地板上 = 取消
-            isGround = false;
-            //剛體.推力(往上)
-            r2d.AddForce(new Vector2(0,jump));
+            isGround = false;   //在地板上 = 取消
+            r2d.AddForce(new Vector2(0,jump));  //剛體.推力(往上)
+            ani.SetTrigger("跳躍觸發");    //動畫元件.設定觸發器
         }
     }
     private void Dead()
