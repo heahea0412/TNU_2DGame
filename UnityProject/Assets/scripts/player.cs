@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {
@@ -22,6 +23,14 @@ public class player : MonoBehaviour
     [Header("音效區域")]
     public AudioSource aud;
     public AudioClip soundcherry;
+    [Header("櫻桃區域")]
+    public int cherryCurrent;
+    public int cherryTotal;
+    public Text textCherry;
+
+
+
+
     #endregion
 
     //定義方法
@@ -54,6 +63,12 @@ public class player : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        cherryTotal=GameObject.FindGameObjectsWithTag("櫻桃").Length;
+        textCherry.text = "櫻桃:0/" + cherryTotal;
+    }
+
     //事件:在特定時間點以指定次數執行
     //更新事件
     private void Update()
@@ -70,5 +85,15 @@ public class player : MonoBehaviour
             isGround = true;
         }
     }
-        
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "櫻桃")
+        {
+            aud.PlayOneShot(soundcherry, 1.5f);
+            Destroy(collision.gameObject);   //刪除碰撞物件
+            cherryCurrent++;
+            textCherry.text = "櫻桃:" + cherryCurrent + "/" + cherryTotal;
+        }
+    }
 }
